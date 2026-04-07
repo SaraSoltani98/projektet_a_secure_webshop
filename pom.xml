@@ -28,6 +28,7 @@
     </scm>
     <properties>
         <java.version>17</java.version>
+        <groovy.version>4.0.23</groovy.version>
     </properties>
     <dependencies>
         <dependency>
