@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Webshop</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div layout:fragment="content">
+    <!-- Content will be injected here by child templates -->
+</div>
+</body>
+</html>
