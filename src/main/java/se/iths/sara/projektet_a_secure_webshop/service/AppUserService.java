@@ -18,9 +18,13 @@ public class AppUserService {
     }
 
     public AppUser registerUser(AppUser user) {
-
+        if (appUserRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
+        }
+        if (!user.isConsent()) {
+            throw new RuntimeException("You must accept consent");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         return appUserRepository.save(user);
     }
 }
