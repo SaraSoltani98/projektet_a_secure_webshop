@@ -11,7 +11,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String email;
     private String password;
     private boolean consent;
     private String role;
@@ -19,8 +19,8 @@ public class AppUser {
     public AppUser() {
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
