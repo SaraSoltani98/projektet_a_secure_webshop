@@ -1,0 +1,22 @@
+<footer th:fragment="footer">
+    <div class="footer-main">
+        <div class="footer-brand">
+            <p class="tagline">Your everyday webshop</p>
+        </div>
+        <div class="footer-cols">
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a th:href="@{/products}">Products</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Webshop. All rights reserved.</p>
+        <div class="footer-legal">
+            <a th:href="@{/privacy}">Privacy policy</a>
+            <a th:href="@{/cookies}">Cookie information</a>
+        </div>
+    </div>
+</footer>

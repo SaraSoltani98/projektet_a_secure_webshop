@@ -6,12 +6,15 @@
     <title>Webshop</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<div layout:fragment="content">
+<main class="main" layout:fragment="content">
     <!-- Content will be injected here by child templates -->
-</div>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

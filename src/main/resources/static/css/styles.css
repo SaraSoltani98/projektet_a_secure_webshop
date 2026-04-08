@@ -6,3 +6,17 @@
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
+
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-areas:
+            "header"
+            "main"
+            "footer";
+    grid-template-rows: auto 1fr auto;
+}
+
+.main {
+    grid-area: main;
+}
