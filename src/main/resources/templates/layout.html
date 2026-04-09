@@ -6,6 +6,8 @@
     <title>Webshop</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/cookie.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -13,5 +15,7 @@
 <div layout:fragment="content">
     <!-- Content will be injected here by child templates -->
 </div>
+
+<div th:replace="fragments/cookiebanner :: cookiebanner"></div>
 </body>
 </html>
