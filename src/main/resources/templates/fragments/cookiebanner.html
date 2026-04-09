@@ -1,0 +1,30 @@
+<div th:fragment="cookiebanner" class="cookie-banner">
+    <div class="cookie-content">
+        <div class="cookie-icon-container">
+            <img th:src="@{/images/cookieIcon.png}" class="cookie-icon" alt="Cookie Icon">
+        </div>
+        <div class="cookie-text">
+            <p>We use third-party cookies to personalize content, ads, and analyze site traffic.</p>
+            <a th:href="@{/cookies}">Learn more</a>
+        </div>
+    </div>
+    <div class="cookie-actions">
+        <button class="btn cookie-decline" onclick="declineCookies()">Decline</button>
+        <button class="btn cookie-accept" onclick="acceptCookies()">Accept</button>
+    </div>
+    <script>
+        function acceptCookies() {
+            document.querySelector('.cookie-banner').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+
+        function declineCookies() {
+            document.querySelector('.cookie-banner').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'false');
+        }
+
+        if (localStorage.getItem('cookiesAccepted')) {
+            document.querySelector('.cookie-banner').style.display = 'none';
+        }
+    </script>
+</div>
