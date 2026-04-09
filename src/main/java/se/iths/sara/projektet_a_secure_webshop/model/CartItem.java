@@ -21,7 +21,7 @@ public class CartItem {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    public void calculateTotalPrice() {
+    public void setTotalPrice() {
         this.totalPrice = this.unitPrice.multiply(new BigDecimal(quantity));
     }
 
@@ -47,10 +47,6 @@ public class CartItem {
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public Product getProduct() {
