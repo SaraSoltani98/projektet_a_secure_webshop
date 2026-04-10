@@ -3,6 +3,7 @@ package se.iths.sara.projektet_a_secure_webshop.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.iths.sara.projektet_a_secure_webshop.model.AppUser;
+import se.iths.sara.projektet_a_secure_webshop.model.Role;
 import se.iths.sara.projektet_a_secure_webshop.repository.AppUserRepository;
 
 @Service
@@ -25,6 +26,8 @@ public class AppUserService {
             throw new RuntimeException("You must accept consent");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         return appUserRepository.save(user);
     }
+
 }
