@@ -1,4 +1,6 @@
 package se.iths.sara.projektet_a_secure_webshop.model;
 
-public class Cart {
+public enum Role {
+    USER,
+    ADMIN
 }
