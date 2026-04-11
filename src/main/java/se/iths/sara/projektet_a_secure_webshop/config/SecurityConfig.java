@@ -8,24 +8,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import se.iths.sara.projektet_a_secure_webshop.service.AppUserDatabaseService;
+import se.iths.sara.projektet_a_secure_webshop.service.AppUserService;
 
 @Configuration
 public class SecurityConfig {
 
-    private final AppUserDatabaseService appUserDatabaseService;
-
-    public SecurityConfig(AppUserDatabaseService appUserDatabaseService) {
-        this.appUserDatabaseService = appUserDatabaseService;
-    }
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                   AuthenticationProvider authenticationProvider) throws Exception {
         http
-                .authenticationProvider(authenticationProvider())
+                .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(auth -> auth
-
-                        .requestMatchers("/css/**", "/", "/login", "/error", "/images/**").permitAll()
+                        .requestMatchers("/css/**", "/login", "/register", "/error", "/images/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -36,6 +31,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );
+
         return http.build();
     }
 
@@ -45,10 +41,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider =
-                new DaoAuthenticationProvider(appUserDatabaseService);
-
+    public AuthenticationProvider authenticationProvider(AppUserService appUserService) {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(appUserService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
