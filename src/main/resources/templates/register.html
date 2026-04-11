@@ -9,8 +9,7 @@
 
 <p th:if="${error}" th:text="${error}" style="color:red;"></p>
 
-<form action="/register" method="post">
-
+<form method="post" th:action="@{/register}">
     <label>Email:</label>
     <input type="text" name="email" required>
     <br><br>
