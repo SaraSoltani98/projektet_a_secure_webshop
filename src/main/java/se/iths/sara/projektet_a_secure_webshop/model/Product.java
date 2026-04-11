@@ -2,6 +2,8 @@ package se.iths.sara.projektet_a_secure_webshop.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "product")
 public class Product {
@@ -13,7 +15,7 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
-    private double price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     private String category;
@@ -25,7 +27,7 @@ public class Product {
         // Empty constructor
     }
 
-    public void product(String name, double price, String category, String imageUrl) {
+    public void product(String name, BigDecimal price, String category, String imageUrl) {
         this.name = name;
         this.price = price;
         this.category = category;
@@ -48,11 +50,11 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
