@@ -9,22 +9,11 @@
         </div>
     </div>
     <div class="cookie-actions">
-        <button class="btn cookie-decline" onclick="declineCookies()">Decline</button>
-        <button class="btn cookie-accept" onclick="acceptCookies()">Accept</button>
+        <form th:action="@{/cookies/dissent}" method="post">
+            <button class="btn cookie-decline" type="submit">Decline</button>
+        </form>
+        <form th:action="@{/cookies/consent}" method="post">
+            <button class="btn cookie-accept" type="submit">Accept</button>
+        </form>
     </div>
-    <script>
-        function acceptCookies() {
-            document.querySelector('.cookie-banner').style.display = 'none';
-            localStorage.setItem('cookiesAccepted', 'true');
-        }
-
-        function declineCookies() {
-            document.querySelector('.cookie-banner').style.display = 'none';
-            localStorage.setItem('cookiesAccepted', 'false');
-        }
-
-        if (localStorage.getItem('cookiesAccepted')) {
-            document.querySelector('.cookie-banner').style.display = 'none';
-        }
-    </script>
 </div>
