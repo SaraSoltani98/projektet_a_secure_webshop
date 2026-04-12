@@ -13,6 +13,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/", "/login", "/error", "/images/**").permitAll()
+                        .requestMatchers("/cookies/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.permitAll())
