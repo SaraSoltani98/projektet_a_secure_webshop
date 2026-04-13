@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import se.iths.sara.projektet_a_secure_webshop.model.AppUser;
-import se.iths.sara.projektet_a_secure_webshop.model.Role;
 import se.iths.sara.projektet_a_secure_webshop.service.AppUserService;
 
 @Controller
@@ -37,7 +36,6 @@ public class AuthController {
             user.setEmail(email);
             user.setPassword(password);
             user.setConsent(consent);
-            user.setRole(Role.ADMIN);
 
             appUserService.registerUser(user);
 

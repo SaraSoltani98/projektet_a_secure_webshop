@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import se.iths.sara.projektet_a_secure_webshop.service.AppUserService;
+import se.iths.sara.projektet_a_secure_webshop.service.AppUserDatabaseService;
 
 @Configuration
 public class SecurityConfig {
@@ -20,16 +20,34 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/login", "/register", "/error", "/images/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .successHandler((request, response, authentication) -> {
+                            boolean isAdmin = authentication.getAuthorities().stream()
+                                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+
+                            if (isAdmin) {
+                                response.sendRedirect("/admin");
+                            } else {
+                                response.sendRedirect("/");
+                            }
+                        })
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .clearAuthentication(true)
                         .permitAll()
+                )
+                .exceptionHandling(exception -> exception
+                        .accessDeniedHandler((request, response, accessDeniedException) ->
+                                response.sendRedirect("/"))
                 );
 
         return http.build();
@@ -41,9 +59,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(AppUserService appUserService) {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(appUserService);
+    public AuthenticationProvider authenticationProvider(AppUserDatabaseService appUserDatabaseService) {
+        DaoAuthenticationProvider authProvider =
+                new DaoAuthenticationProvider(appUserDatabaseService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
+
 }
