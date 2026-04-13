@@ -1,6 +1,7 @@
 package se.iths.sara.projektet_a_secure_webshop.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,17 +28,21 @@ public class AuthController {
     public String registerUser(
             @RequestParam String email,
             @RequestParam String password,
-            @RequestParam(required = false) boolean consent
+            @RequestParam(required = false, defaultValue = "false") boolean consent,
+            Model model
     ) {
+        try {
+            AppUser user = new AppUser();
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setConsent(consent);
 
-        AppUser user = new AppUser();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setConsent(consent);
-        user.setRole("USER");
+            appUserService.registerUser(user);
 
-        appUserService.registerUser(user);
-
-        return "redirect:/login";
+            return "redirect:/login";
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            return "register";
+        }
     }
 }
