@@ -1,21 +1,18 @@
 package se.iths.sara.projektet_a_secure_webshop.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "app_users")
 public class AppUser {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String email;
     private String password;
     private boolean consent;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public AppUser() {
     }
@@ -48,11 +45,11 @@ public class AppUser {
         this.consent = consent;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }
