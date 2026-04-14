@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+
+<h2>Admin sida</h2>
+
+<p>Du är inloggad som ADMIN.</p>
+
+<hr>
+
+<a th:href="@{/}">Till startsidan</a>
+
+<br><br>
+
+<!-- Logout -->
+<form method="post" th:action="@{/logout}">
+    <button type="submit">Logga ut</button>
+</form>
+
+</body>
+</html>
