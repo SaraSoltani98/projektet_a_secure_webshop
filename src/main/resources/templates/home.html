@@ -11,6 +11,10 @@
         <h1>Welcome to our Webshop!</h1>
         <p>Discover our wide range of products and enjoy shopping with us.</p>
     </div>
+
+    <div th:if="${!hasConsented}">
+        <div th:if="${!hasConsented}" th:replace="fragments/cookiebanner :: cookiebanner"></div>
+    </div>
 </div>
 </body>
 </html>
