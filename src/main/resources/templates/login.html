@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Webshop - Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
+<section class="login-section">
+    <h2>Sign in</h2>
 
-<h2>Logga in</h2>
+    <form method="post" th:action="@{/login}">
+        <div class="login-field">
+            <label for="email-field">Email</label>
+            <input id="email-field" type="email" name="username" required>
+        </div>
 
-<form method="post" th:action="@{/login}">
-    <label>Email:</label>
-    <input type="email" name="username" required>
-    <br><br>
+        <div class="login-field">
+            <label for="password-field">Password</label>
+            <input id="password-field" type="password" name="password" required>
+        </div>
 
-    <label>Password:</label>
-    <input type="password" name="password" required>
-    <br><br>
-
-    <button type="submit">Logga in</button>
-</form>
-
+        <button class="btn btn-primary btn-full" type="submit">Sign in</button>
+    </form>
+</section>
 </body>
 </html>

@@ -1,0 +1,82 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6f6f6;
+}
+
+.login-section {
+    max-width: 450px;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.login-section h2 {
+    margin-bottom: 24px;
+    font-size: 32px;
+}
+
+.login-field {
+    margin-bottom: 24px;
+}
+
+.login-field label {
+    margin-bottom: 4px;
+    display: block;
+    text-align: left;
+    color: #333333;
+}
+
+.login-field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.login-field input:focus {
+    outline: 2px solid #3b82f6;
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-primary {
+    color: white;
+    background: #3b82f6;
+}
+
+.btn-primary:hover {
+    background: #2563eb;
+}
