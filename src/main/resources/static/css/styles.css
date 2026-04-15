@@ -20,3 +20,8 @@ body {
 .main {
     grid-area: main;
 }
+
+button {
+    outline: none;
+    border: none;
+}
