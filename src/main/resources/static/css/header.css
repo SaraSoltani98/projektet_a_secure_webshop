@@ -28,34 +28,3 @@ nav ul li a {
 nav ul li a:hover {
     color: #6b7280;
 }
-
-
-/* Auth buttons */
-.btn {
-    padding: 0.5rem 1.5rem;
-    border-radius: 0.75rem;
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: background 0.2s;
-}
-
-.btn-signin {
-    margin-left: auto;
-    margin-right: 0.75rem;
-    color: #111827;
-    background: #f9fafb;
-}
-
-.btn-signin:hover {
-    background: #f3f4f6;
-}
-
-.btn-signup {
-    color: white;
-    background: #3b82f6;
-}
-
-.btn-signup:hover {
-    background: #2563eb;
-}
