@@ -26,10 +26,10 @@ public class Product {
     @Column(nullable = false)
     private String category;
 
-    @NotBlank(message = "Bild-URL måste anges")
+    @NotBlank(message = "Type in a valid URL")
     @Pattern(
             regexp = "^(http|https)://.*$",
-            message = "Bild-URL måste börja med http:// eller https://"
+            message = "URL must begin with http:// or https://"
     )
     @Column(nullable = false)
     private String imageUrl;
