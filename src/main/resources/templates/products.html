@@ -14,7 +14,7 @@
         <img th:src="${product.imageUrl}" alt="Product picture" width="200">
 
         <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
-            <button type="submit">Lägg i kundvagn</button>
+            <button type="submit">Add to cart</button>
         </form>
     </div>
 </div>
