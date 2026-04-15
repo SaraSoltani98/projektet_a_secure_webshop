@@ -1,5 +1,6 @@
 package se.iths.sara.projektet_a_secure_webshop.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class AdminController {
     }
 
     @PostMapping("/products")
-    public String createProduct(@ModelAttribute("product") Product product) {
+    public String createProduct(@Valid @ModelAttribute("product") Product product) {
         productService.createProduct(product);
         return "redirect:/admin";
     }

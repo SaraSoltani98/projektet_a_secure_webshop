@@ -1,6 +1,9 @@
 package se.iths.sara.projektet_a_secure_webshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.math.BigDecimal;
 
@@ -11,15 +14,23 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Type in a product name")
     @Column(nullable = false)
     private String name;
 
+    @NotNull(message = "Type in a valid price")
     @Column(nullable = false)
     private BigDecimal price;
 
+    @NotBlank(message = "Type in a category")
     @Column(nullable = false)
     private String category;
 
+    @NotBlank(message = "Bild-URL måste anges")
+    @Pattern(
+            regexp = "^(http|https)://.*$",
+            message = "Bild-URL måste börja med http:// eller https://"
+    )
     @Column(nullable = false)
     private String imageUrl;
 
