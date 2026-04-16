@@ -28,7 +28,7 @@ public class Cart {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public List<CartItem> getCarts() {
+    public List<CartItem> getCart() {
         return cart;
     }
 }
