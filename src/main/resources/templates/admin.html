@@ -38,108 +38,12 @@
         </section>
 
         <section class="admin-productsSection">
-            <div>
+            <div th:each="product : ${products}">
                 <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
-                </div>
-            </div>
-            <div>
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2>Product name</h2>
-                    <p><strong>Category:</strong> <span>Category</span></p>
-                    <p><strong>Price:</strong> <span>19.99</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture">
+                    <h2 th:text="${product.name}">Product name</h2>
+                    <p><strong>Category:</strong> <span th:text="${product.category}">Category</span></p>
+                    <p><strong>Price:</strong> <span th:text="${product.price}">0</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture" width="200">
                 </div>
             </div>
         </section>
