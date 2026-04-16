@@ -1,52 +1,149 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
+    <title>Webshop - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 <body>
 <div layout:fragment="content">
 
-    <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-        <h2>Create Product</h2>
+    <div class="admin-pageContent">
+        <section class="admin-addProductSection">
+            <h2>Create Product</h2>
 
-        <form th:action="@{/admin/products}" th:object="${product}" method="post">
+            <form method="post" th:action="@{/admin/products}" th:object="${product}">
+                <div class="form-field">
+                    <label>Name*</label>
+                    <input type="text" th:field="*{name}" required>
+                </div>
+                <div class="form-field">
+                    <label>Category*</label>
+                    <input type="text" th:field="*{category}" required>
+                </div>
+                <div class="form-field">
+                    <label>Price*</label>
+                    <input type="number" th:field="*{price}" required>
+                </div>
+                <div class="form-field">
+                    <label>Image URL*</label>
+                    <input type="text" th:field="*{imageUrl}" required>
+                </div>
 
-            <p>
-                Name:<br>
-                <input type="text" th:field="*{name}">
-            </p>
+                <button class="btn btn-primary" type="submit">Create Product</button>
+            </form>
+        </section>
 
-            <p>
-                Category:<br>
-                <input type="text" th:field="*{category}">
-            </p>
-
-            <p>
-                Price:<br>
-                <input type="number" step="0.01" th:field="*{price}">
-            </p>
-
-            <p>
-                Image URL:<br>
-                <input type="text" th:field="*{imageUrl}">
-            </p>
-
-            <button type="submit">Create Product</button>
-        </form>
+        <section class="admin-productsSection">
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+            <div>
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <h2>Product name</h2>
+                    <p><strong>Category:</strong> <span>Category</span></p>
+                    <p><strong>Price:</strong> <span>19.99</span> $</p>
+                    <img th:src="${product.imageUrl}" alt="Product picture">
+                </div>
+            </div>
+        </section>
     </div>
-
-    <div th:each="product : ${products}">
-        <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-            <h2 th:text="${product.name}">Product name</h2>
-            <p><strong>Category:</strong> <span th:text="${product.category}">Category</span></p>
-            <p><strong>Price:</strong> <span th:text="${product.price}">0</span> $</p>
-            <img th:src="${product.imageUrl}" alt="Product picture" width="200">
-        </div>
-    </div>
-
 </div>
 </body>
 </html>
