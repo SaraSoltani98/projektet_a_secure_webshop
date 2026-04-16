@@ -23,7 +23,7 @@ public class AdminController {
     @GetMapping
     public String showAdminPage(Model model) {
         model.addAttribute("product", new Product());
-        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("products", productService.getAllProductsSorted());
         return "admin";
     }
 
@@ -32,7 +32,7 @@ public class AdminController {
                                 BindingResult bindingResult,
                                 Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("products", productService.getAllProducts());
+            model.addAttribute("products", productService.getAllProductsSorted());
             return "admin";
         }
         productService.createProduct(product);
