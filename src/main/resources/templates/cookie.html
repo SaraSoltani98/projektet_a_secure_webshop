@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Webshop - Cookies</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="cookie-page">
+        <h1>Cookie information</h1>
+        <div class="cookie-section">
+            <h2>What are cookies?</h2>
+            <p>Cookies are small text files stored in your browser when you visit a website. They help the site remember
+                information about your visit.</p>
+        </div>
+
+        <div class="cookie-section">
+            <h2>Cookies we use</h2>
+            <div class="cookie-table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Purpose</th>
+                        <th>Duration</th>
+                        <th>Type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>JSESSIONID</td>
+                        <td>Keeps you logged in during your session.</td>
+                        <td>Session</td>
+                        <td><span class="badge badge-required">Required</span></td>
+                    </tr>
+                    <tr>
+                        <td>cookie_consent</td>
+                        <td>Remembers your cookie preference.</td>
+                        <td>7 days</td>
+                        <td><span class="badge badge-optional">Optional</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -7,7 +7,50 @@
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-areas:
+            "header"
+            "main"
+            "footer";
+    grid-template-rows: auto 1fr auto;
+}
+
+.main {
+    grid-area: main;
+}
+
 button {
     outline: none;
-    border: none
+    border: none;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-primary {
+    color: white;
+    background: #3b82f6;
+}
+
+.btn-primary:hover {
+    background: #2563eb;
+}
+
+.btn-secondary {
+    margin-right: 0.75rem;
+    color: #111827;
+    background: #f9fafb;
+}
+
+.btn-secondary:hover {
+    background: #f3f4f6;
 }

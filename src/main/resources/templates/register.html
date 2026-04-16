@@ -1,32 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>Registrera</title>
     <meta charset="UTF-8">
+    <title>Webshop - Register</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
 </head>
 <body>
-<h1>Registrera användare</h1>
+<section class="form-section">
+    <h2>Create Account</h2>
 
-<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+    <p th:if="${error}" class="error-msg" th:text="${error}"></p>
 
-<form method="post" th:action="@{/register}">
-    <label>Email:</label>
-    <input type="text" name="email" required>
-    <br><br>
+    <form method="post" th:action="@{/register}">
+        <div class="form-field">
+            <label for="email-field">Email*</label>
+            <input id="email-field" type="email" name="email" required>
+        </div>
 
-    <label>Lösenord:</label>
-    <input type="password" name="password" required>
-    <br><br>
+        <div class="form-field">
+            <label for="password-field">Password*</label>
+            <input id="password-field" type="password" name="password" required>
+        </div>
 
-    <label>
-        <input type="checkbox" name="consent">
-        Jag godkänner integritetspolicyn
-    </label>
-    <br><br>
+        <div class="form-field">
+            <label for="policy-field">
+                <input id="policy-field" type="checkbox" name="consent" required>
+                * I agree to the terms and conditions
+            </label>
+        </div>
 
-    <button type="submit">Registrera</button>
-
-</form>
-
+        <button class="btn btn-primary btn-full" type="submit">Create account</button>
+    </form>
+</section>
 </body>
 </html>
