@@ -22,6 +22,7 @@ public class AdminController {
 
     @GetMapping
     public String showAdminPage(Model model) {
+        model.addAttribute("product", new Product());
         model.addAttribute("products", productService.getAllProducts());
         return "admin";
     }
