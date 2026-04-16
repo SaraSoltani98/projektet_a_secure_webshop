@@ -1,25 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Admin</title>
 </head>
 <body>
+<div layout:fragment="content">
 
-<h2>Admin sida</h2>
+    <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+        <h2>Create Product</h2>
 
-<p>Du är inloggad som ADMIN.</p>
+        <form th:action="@{/admin/products}" th:object="${product}" method="post">
 
-<hr>
+            <p>
+                Name:<br>
+                <input type="text" th:field="*{name}">
+            </p>
 
-<a th:href="@{/}">Till startsidan</a>
+            <p>
+                Category:<br>
+                <input type="text" th:field="*{category}">
+            </p>
 
-<br><br>
+            <p>
+                Price:<br>
+                <input type="number" step="0.01" th:field="*{price}">
+            </p>
 
-<!-- Logout -->
-<form method="post" th:action="@{/logout}">
-    <button type="submit">Logga ut</button>
-</form>
+            <p>
+                Image URL:<br>
+                <input type="text" th:field="*{imageUrl}">
+            </p>
 
+            <button type="submit">Create Product</button>
+        </form>
+    </div>
+
+    <div th:each="product : ${products}">
+        <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+            <h2 th:text="${product.name}">Product name</h2>
+            <p><strong>Category:</strong> <span th:text="${product.category}">Category</span></p>
+            <p><strong>Price:</strong> <span th:text="${product.price}">0</span> $</p>
+            <img th:src="${product.imageUrl}" alt="Product picture" width="200">
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
