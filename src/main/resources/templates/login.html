@@ -6,22 +6,24 @@
     <link rel="stylesheet" th:href="@{/css/form.css}">
 </head>
 <body>
-<section class="form-section">
-    <h2>Sign in</h2>
+<main class="auth-page">
+    <section class="form-section">
+        <h2>Sign in</h2>
 
-    <form method="post" th:action="@{/login}">
-        <div class="form-field">
-            <label for="email-field">Email</label>
-            <input id="email-field" type="email" name="username" required>
-        </div>
+        <form method="post" th:action="@{/login}">
+            <div class="form-field">
+                <label for="email-field">Email</label>
+                <input id="email-field" type="email" name="username" required>
+            </div>
 
-        <div class="form-field">
-            <label for="password-field">Password</label>
-            <input id="password-field" type="password" name="password" required>
-        </div>
+            <div class="form-field">
+                <label for="password-field">Password</label>
+                <input id="password-field" type="password" name="password" required>
+            </div>
 
-        <button class="btn btn-primary btn-full" type="submit">Sign in</button>
-    </form>
-</section>
+            <button class="btn btn-primary btn-full" type="submit">Sign in</button>
+        </form>
+    </section>
+</main>
 </body>
 </html>
