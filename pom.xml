@@ -101,6 +101,11 @@
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>se.iths.martin</groupId>
+            <artifactId>spring-messenger</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
