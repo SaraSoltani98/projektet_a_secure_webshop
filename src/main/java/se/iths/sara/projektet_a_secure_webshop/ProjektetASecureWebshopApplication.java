@@ -2,10 +2,8 @@ package se.iths.sara.projektet_a_secure_webshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
-@ComponentScan(basePackages = {"se.iths.sara", "se.iths.martin"})
+@SpringBootApplication(scanBasePackages = "se.iths.martin")
 public class ProjektetASecureWebshopApplication {
 
     public static void main(String[] args) {
