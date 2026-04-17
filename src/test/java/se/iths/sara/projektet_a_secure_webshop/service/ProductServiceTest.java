@@ -7,6 +7,7 @@ import se.iths.sara.projektet_a_secure_webshop.repository.ProductRepository;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -28,5 +29,14 @@ public class ProductServiceTest {
         verify(productRepository, times(1)).findAllByOrderByCategoryAscNameAsc();
     }
 
-    
+    void shouldCreateProduct() {
+        Product product = new Product("Test", new BigDecimal(10), "Electronic", "Url");
+
+        when(productRepository.save(product)).thenReturn(product);
+
+        Product saved = productService.createProduct(product);
+
+        assertNotNull(saved);
+        verify(productRepository).save(product);
+    }
 }
