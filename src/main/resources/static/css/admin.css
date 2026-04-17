@@ -17,8 +17,13 @@
 
 .admin-addProductSection {
     max-width: 450px;
-    width: 100%;
-    margin: 20px 0 40px 20px;
+    margin: 20px 20px 40px;
+}
+
+@media (min-width: 1000px) {
+    .admin-addProductSection {
+        width: 100%;
+    }
 }
 
 .admin-addProductSection h2 {

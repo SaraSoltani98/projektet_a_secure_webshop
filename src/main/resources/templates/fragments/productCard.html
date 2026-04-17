@@ -1,0 +1,13 @@
+<div th:fragment="productCard(product)" class="product-card">
+    <img th:src="${product.imageUrl}" alt="Product picture">
+    <div class="product-info">
+        <span class="product-category" th:text="${product.category}">Category</span>
+        <h3 class="product-name" th:text="${product.name}">Product name</h3>
+        <div class="product-footer">
+            <span class="product-price"
+                  th:text="${product.price} + ' $'">
+                0 $
+            </span>
+        </div>
+    </div>
+</div>
