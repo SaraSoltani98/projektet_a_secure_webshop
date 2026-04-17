@@ -1,6 +1,7 @@
 package se.iths.sara.projektet_a_secure_webshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -19,6 +20,7 @@ public class Product {
     private String name;
 
     @NotNull(message = "Type in a valid price")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price has to be greater than 0")
     @Column(nullable = false)
     private BigDecimal price;
 
