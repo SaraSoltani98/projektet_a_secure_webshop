@@ -28,6 +28,8 @@ public class ProductServiceTest {
         List<Product> result = productService.getAllProductsSorted();
 
         assertEquals(3, result.size());
+        assertEquals("Test3", result.get(2).getName());
+        assertEquals("Test1", result.get(0).getName());
         verify(productRepository, times(1)).findAllByOrderByCategoryAscNameAsc();
     }
 
