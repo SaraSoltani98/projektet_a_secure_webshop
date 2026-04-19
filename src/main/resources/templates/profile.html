@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profil</title>
+</head>
+<body>
+
+<p>Inloggad som: <span th:text="${email}"></span></p>
+
+<form method="post" th:action="@{/logout}">
+    <button type="submit">Logga ut</button>
+</form>
+
+</body>
+</html>

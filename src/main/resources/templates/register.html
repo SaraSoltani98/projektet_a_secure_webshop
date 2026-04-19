@@ -5,13 +5,22 @@
     <meta charset="UTF-8">
 </head>
 <body>
+
 <h1>Registrera användare</h1>
 
+<!-- 🔥 Visa info om användaren kom från login -->
+<p th:if="${param.needRegister}" style="color:blue;">
+    Du behöver registrera dig först.
+</p>
+
+<!-- ❌ Visa felmeddelande -->
 <p th:if="${error}" th:text="${error}" style="color:red;"></p>
 
 <form method="post" th:action="@{/register}">
+
     <label>Email:</label>
-    <input type="text" name="email" required>
+    <!-- 🔥 Förifyll email -->
+    <input type="email" name="email" th:value="${param.email}" required>
     <br><br>
 
     <label>Lösenord:</label>
@@ -25,7 +34,13 @@
     <br><br>
 
     <button type="submit">Registrera</button>
+</form>
 
+<br>
+
+<!-- 🔙 Tillbaka till login -->
+<form th:action="@{/login}" method="get">
+    <button type="submit">Tillbaka till login</button>
 </form>
 
 </body>

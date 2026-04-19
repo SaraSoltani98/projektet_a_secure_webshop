@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -8,9 +9,22 @@
 
 <h2>Logga in</h2>
 
-<form method="post" th:action="@{/login}">
+<p th:if="${param.logout}" style="color:green;">
+    Du har loggats ut.
+</p>
+
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<div th:if="${error == 'Fel email'}" style="margin-bottom: 20px;">
+    <p>Har du inget konto?</p>
+    <a th:href="@{/register}">
+        <button type="button">Registrera dig</button>
+    </a>
+</div>
+
+<form method="post" th:action="@{/login-request}">
     <label>Email:</label>
-    <input type="email" name="username" required>
+    <input type="email" name="email" required>
     <br><br>
 
     <label>Password:</label>

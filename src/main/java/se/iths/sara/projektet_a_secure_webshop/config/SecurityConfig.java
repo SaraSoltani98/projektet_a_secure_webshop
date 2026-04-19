@@ -8,10 +8,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import se.iths.sara.projektet_a_secure_webshop.model.LoginToken;
 import se.iths.sara.projektet_a_secure_webshop.service.AppUserDatabaseService;
+import se.iths.sara.projektet_a_secure_webshop.service.LoginTokenService;
 
 @Configuration
 public class SecurityConfig {
+
+    private final LoginTokenService loginTokenService;
+
+    public SecurityConfig(LoginTokenService loginTokenService) {
+        this.loginTokenService = loginTokenService;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
@@ -19,21 +27,18 @@ public class SecurityConfig {
         http
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/login", "/register", "/error", "/images/**").permitAll()
+                        .requestMatchers("/css/**", "/login", "/login-request", "/register", "/error", "/images/**", "/verify-login").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .successHandler((request, response, authentication) -> {
-                            boolean isAdmin = authentication.getAuthorities().stream()
-                                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+                            String email = authentication.getName();
 
-                            if (isAdmin) {
-                                response.sendRedirect("/admin");
-                            } else {
-                                response.sendRedirect("/");
-                            }
+                            LoginToken token = loginTokenService.createToken(email);
+
+                            response.sendRedirect("/verify-login?token=" + token.getToken());
                         })
                         .permitAll()
                 )
@@ -60,10 +65,8 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider(AppUserDatabaseService appUserDatabaseService) {
-        DaoAuthenticationProvider authProvider =
-                new DaoAuthenticationProvider(appUserDatabaseService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(appUserDatabaseService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
 }
