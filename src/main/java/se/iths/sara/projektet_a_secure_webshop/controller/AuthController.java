@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
@@ -26,12 +27,31 @@ public class AuthController {
 
     private final AppUserService appUserService;
     private final LoginTokenService loginTokenService;
+    private final PasswordEncoder passwordEncoder;
     private final SecurityContextRepository securityContextRepository =
             new HttpSessionSecurityContextRepository();
 
-    public AuthController(AppUserService appUserService, LoginTokenService loginTokenService) {
+    public AuthController(AppUserService appUserService,
+                          LoginTokenService loginTokenService,
+                          PasswordEncoder passwordEncoder) {
         this.appUserService = appUserService;
         this.loginTokenService = loginTokenService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @GetMapping("/login")
+    public String showLoginPage(@RequestParam(required = false) String error,
+                                @RequestParam(required = false) String deleted,
+                                Model model) {
+        if (error != null) {
+            model.addAttribute("error", error);
+        }
+
+        if (deleted != null) {
+            model.addAttribute("message", "Ditt konto har tagits bort.");
+        }
+
+        return "login";
     }
 
     @GetMapping("/register")
@@ -39,13 +59,42 @@ public class AuthController {
         return "register";
     }
 
+    @PostMapping("/login-request")
+    public String login(@RequestParam String email,
+                        @RequestParam String password,
+                        Model model) {
+
+        Optional<AppUser> optionalUser = appUserService.findByEmail(email);
+
+        if (optionalUser.isEmpty()) {
+            return "redirect:/register?needRegister=true&email=" + email;
+        }
+
+        AppUser user = optionalUser.get();
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            model.addAttribute("error", "Fel lösenord");
+            return "login";
+        }
+
+        LoginToken token = loginTokenService.createToken(email);
+
+        // Tillfällig lösning tills riktig mail-service är inkopplad
+        System.out.println("===== LOGIN MAIL =====");
+        System.out.println("Till: " + email);
+        System.out.println("Klicka på länken:");
+        System.out.println("http://localhost:8080/verify-login?token=" + token.getToken());
+        System.out.println("======================");
+
+        model.addAttribute("message", "En inloggningslänk har skickats till din email.");
+        return "login";
+    }
+
     @PostMapping("/register")
-    public String registerUser(
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam(required = false, defaultValue = "false") boolean consent,
-            Model model
-    ) {
+    public String registerUser(@RequestParam String email,
+                               @RequestParam String password,
+                               @RequestParam(required = false, defaultValue = "false") boolean consent,
+                               Model model) {
         try {
             AppUser user = new AppUser();
             user.setEmail(email);
@@ -61,8 +110,11 @@ public class AuthController {
     }
 
     @GetMapping("/verify-login")
-    public String verifyLoginToken(@RequestParam String token, Model model, HttpServletRequest request,
+    public String verifyLoginToken(@RequestParam String token,
+                                   Model model,
+                                   HttpServletRequest request,
                                    HttpServletResponse response) {
+
         Optional<LoginToken> optionalToken = loginTokenService.findByToken(token);
 
         if (optionalToken.isEmpty()) {
@@ -77,17 +129,22 @@ public class AuthController {
             return "login";
         }
 
+        Optional<AppUser> optionalUser = appUserService.findByEmail(loginToken.getEmail());
+
+        if (optionalUser.isEmpty()) {
+            model.addAttribute("error", "Användaren finns inte.");
+            return "login";
+        }
+
+        AppUser user = optionalUser.get();
+
         loginTokenService.markAsUsed(loginToken);
 
-        String role = "ROLE_USER";
-
-        if (loginToken.getEmail().equals("test@admin.com")) {
-            role = "ROLE_ADMIN";
-        }
+        String role = "ROLE_" + user.getRole().name();
 
         UsernamePasswordAuthenticationToken auth =
                 new UsernamePasswordAuthenticationToken(
-                        loginToken.getEmail(),
+                        user.getEmail(),
                         null,
                         List.of(new SimpleGrantedAuthority(role))
                 );
@@ -97,9 +154,10 @@ public class AuthController {
         SecurityContextHolder.setContext(context);
         securityContextRepository.saveContext(context, request, response);
 
-        if (role.equals("ROLE_ADMIN")) {
+        if (user.getRole().name().equals("ADMIN")) {
             return "redirect:/admin";
         }
-        return "redirect:/";
+
+        return "redirect:/profile";
     }
 }

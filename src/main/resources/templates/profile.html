@@ -1,13 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="sv">
 <head>
     <title>Profil</title>
+    <meta charset="UTF-8">
 </head>
 <body>
 
-<p>Inloggad som: <span th:text="${email}"></span></p>
+<h2>Min profil</h2>
+
+<p>
+    Inloggad som:
+    <strong th:text="${email}"></strong>
+</p>
+
+<hr>
+
+<a th:href="@{/home}">
+    <button type="button">Gå till hemsidan</button>
+</a>
+
+<br><br>
+
+<form method="post" th:action="@{/profile/send-email}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <button type="submit">Få mina uppgifter via mail</button>
+</form>
+
+<br>
+
+<form method="post" th:action="@{/profile/delete}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <button type="submit" style="color:red;">
+        Ta bort mitt konto
+    </button>
+</form>
+
+<br><br>
 
 <form method="post" th:action="@{/logout}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <button type="submit">Logga ut</button>
 </form>
 
