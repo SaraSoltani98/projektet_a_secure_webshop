@@ -1,37 +1,34 @@
 package se.iths.sara.projektet_a_secure_webshop.model;
 
-import jakarta.persistence.*;
-
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 public class Cart {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private BigDecimal totalAmount;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> cartItems;
+    private List<CartItem> cart = new ArrayList<>();
 
-    public Long getId() {
-        return id;
+    public void addCartItem(Product product) {
+        for (CartItem item : cart) {
+            if (item.getProduct().getId().equals(product.getId())) {
+                item.increaseQuantity();
+                return;
+            }
+        }
+        cart.add(new CartItem(product));
+    }
+
+    public void removeCartItem(Long productId) {
+        cart.removeIf(item -> item.getProduct().getId().equals(productId));
     }
 
     public BigDecimal getTotalAmount() {
-        return totalAmount;
+        return cart.stream()
+                .map(CartItem::getTotalPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public List<CartItem> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
+    public List<CartItem> getCart() {
+        return cart;
     }
 }

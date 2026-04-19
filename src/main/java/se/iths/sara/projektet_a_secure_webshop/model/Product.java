@@ -1,6 +1,12 @@
 package se.iths.sara.projektet_a_secure_webshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "product")
@@ -9,15 +15,24 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Type in a product name")
     @Column(nullable = false)
     private String name;
 
+    @NotNull(message = "Type in a valid price")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price has to be greater than 0")
     @Column(nullable = false)
-    private double price;
+    private BigDecimal price;
 
+    @NotBlank(message = "Type in a category")
     @Column(nullable = false)
     private String category;
 
+    @NotBlank(message = "Type in a valid URL")
+    @Pattern(
+            regexp = "^(http|https)://.*$",
+            message = "URL must begin with http:// or https://"
+    )
     @Column(nullable = false)
     private String imageUrl;
 
@@ -25,7 +40,7 @@ public class Product {
         // Empty constructor
     }
 
-    public void product(String name, double price, String category, String imageUrl) {
+    public void product(String name, BigDecimal price, String category, String imageUrl) {
         this.name = name;
         this.price = price;
         this.category = category;
@@ -48,11 +63,11 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
