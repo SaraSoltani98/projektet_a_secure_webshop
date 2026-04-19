@@ -22,4 +22,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
+    - name: Debug structure
+      run: ls -R
+
   
