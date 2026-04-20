@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-public class ProductServiceTest {
+public class ProductServiceMockTest {
     ProductRepository productRepository = mock(ProductRepository.class);
     ProductService productService = new ProductService(productRepository);
 
