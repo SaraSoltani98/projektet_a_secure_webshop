@@ -6,31 +6,33 @@
     <link rel="stylesheet" th:href="@{/css/form.css}">
 </head>
 <body>
-<section class="form-section">
-    <h2>Create Account</h2>
+<main class="auth-page">
+    <section class="form-section">
+        <h2>Create Account</h2>
 
-    <p th:if="${error}" class="error-msg" th:text="${error}"></p>
+        <p th:if="${error}" class="error-msg" th:text="${error}"></p>
 
-    <form method="post" th:action="@{/register}">
-        <div class="form-field">
-            <label for="email-field">Email*</label>
-            <input id="email-field" type="email" name="email" required>
-        </div>
+        <form method="post" th:action="@{/register}">
+            <div class="form-field">
+                <label for="email-field">Email*</label>
+                <input id="email-field" type="email" name="email" required>
+            </div>
 
-        <div class="form-field">
-            <label for="password-field">Password*</label>
-            <input id="password-field" type="password" name="password" required>
-        </div>
+            <div class="form-field">
+                <label for="password-field">Password*</label>
+                <input id="password-field" type="password" name="password" required>
+            </div>
 
-        <div class="form-field">
-            <label for="policy-field">
-                <input id="policy-field" type="checkbox" name="consent" required>
-                * I agree to the terms and conditions
-            </label>
-        </div>
+            <div class="form-field">
+                <label for="policy-field">
+                    <input id="policy-field" type="checkbox" name="consent" required>
+                    * I agree to the terms and conditions
+                </label>
+            </div>
 
-        <button class="btn btn-primary btn-full" type="submit">Create account</button>
-    </form>
-</section>
+            <button class="btn btn-primary btn-full" type="submit">Create account</button>
+        </form>
+    </section>
+</main>
 </body>
 </html>
