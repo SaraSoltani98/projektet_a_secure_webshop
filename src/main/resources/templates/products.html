@@ -4,18 +4,33 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
+    <title>Webshop - All Products</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/product.css}">
 </head>
 <body>
 <div layout:fragment="content">
-    <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-        <h2 th:text="${product.name}">Product name</h2>
-        <p><strong>Category:</strong> <span th:text="${product.category}">Category</span></p>
-        <p><strong>Price:</strong> <span th:text="${product.price}">0</span> $</p>
-        <img th:src="${product.imageUrl}" alt="Product picture" width="200">
+    <h2>Products</h2>
 
-        <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
-            <button type="submit">Add to cart</button>
-        </form>
+    <div class="products-grid">
+        <p th:if="${#lists.isEmpty(products)}">No items found.</p>
+        <th:block th:if="${products != null and !#lists.isEmpty(products)}">
+            <div th:each="product : ${products}" class="product-card">
+                <img th:src="${product.imageUrl}" alt="Product picture">
+                <div class="product-info">
+                    <span class="product-category" th:text="${product.category}">Category</span>
+                    <h3 class="product-name" th:text="${product.name}">Product name</h3>
+                    <div class="product-footer">
+                    <span class="product-price" th:text="${product.price} + ' $'">
+                        0 $
+                    </span>
+                    </div>
+                    <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+                        <button class="btn btn-primary btn-full" type="submit">Add to cart</button>
+                    </form>
+                </div>
+            </div>
+        </th:block>
     </div>
 </div>
 </body>
