@@ -36,11 +36,11 @@ public class Product {
     @Column(nullable = false)
     private String imageUrl;
 
-    public void product() {
+    public Product() {
         // Empty constructor
     }
 
-    public void product(String name, BigDecimal price, String category, String imageUrl) {
+    public Product(String name, BigDecimal price, String category, String imageUrl) {
         this.name = name;
         this.price = price;
         this.category = category;
