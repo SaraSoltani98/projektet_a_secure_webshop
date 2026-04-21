@@ -30,6 +30,12 @@
         <java.version>17</java.version>
         <groovy.version>4.0.23</groovy.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/MartinGruter/spring-messenger</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -100,6 +106,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>se.iths.martin</groupId>
+            <artifactId>spring-messenger</artifactId>
+            <version>1.0.5</version>
         </dependency>
     </dependencies>
 

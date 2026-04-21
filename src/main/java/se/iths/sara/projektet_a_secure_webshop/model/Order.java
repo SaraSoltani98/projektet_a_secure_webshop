@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +20,11 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> order = new ArrayList<>();
 
-    public Order(String username, BigDecimal totalPrice, LocalDateTime orderDate) {
+    public Order(String username, BigDecimal totalPrice, LocalDateTime orderDate, List<OrderItem> order) {
         this.username = username;
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
+        this.order = order;
     }
 
     public Order() {
@@ -36,6 +38,24 @@ public class Order {
 
     public void updateTotalAmount() {
         totalPrice = order.stream().map(OrderItem::getTotalPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public String toMail() {
+        StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("Order date: ").append(orderDate).append("\n");
+        stringbuilder.append("Total amount: ").append(getTotalPrice()).append(" SEK\n\n");
+        stringbuilder.append("Items:\n");
+        for (OrderItem item : order) {
+            stringbuilder.append("- ")
+                    .append(item.getProductName())
+                    .append(" x ")
+                    .append(item.getQuantity())
+                    .append(" = ")
+                    .append(item.getTotalPrice())
+                    .append(" SEK\n");
+        }
+
+        return stringbuilder.toString();
     }
 
     public List<OrderItem> getOrder() {

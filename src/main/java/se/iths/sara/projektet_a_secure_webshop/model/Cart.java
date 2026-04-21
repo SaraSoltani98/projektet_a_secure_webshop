@@ -6,29 +6,37 @@ import java.util.List;
 
 public class Cart {
 
-    private List<CartItem> cart = new ArrayList<>();
+    private List<CartItem> items = new ArrayList<>();
 
     public void addCartItem(Product product) {
-        for (CartItem item : cart) {
+        for (CartItem item : items) {
             if (item.getProduct().getId().equals(product.getId())) {
                 item.increaseQuantity();
                 return;
             }
         }
-        cart.add(new CartItem(product));
+        items.add(new CartItem(product));
     }
 
     public void removeCartItem(Long productId) {
-        cart.removeIf(item -> item.getProduct().getId().equals(productId));
+        items.removeIf(item -> item.getProduct().getId().equals(productId));
     }
 
     public BigDecimal getTotalAmount() {
-        return cart.stream()
+        return items.stream()
                 .map(CartItem::getTotalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public List<CartItem> getCart() {
-        return cart;
+    public List<CartItem> getItems() {
+        return items;
+    }
+
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
+    public void clear() {
+        items.clear();
     }
 }
