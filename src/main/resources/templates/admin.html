@@ -7,6 +7,7 @@
     <title>Webshop - Admin</title>
     <link rel="stylesheet" th:href="@{/css/form.css}">
     <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/product.css}">
 </head>
 <body>
 <div layout:fragment="content">
@@ -37,15 +38,12 @@
             </form>
         </section>
 
-        <section class="admin-productsSection">
-            <div th:each="product : ${products}">
-                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                    <h2 th:text="${product.name}">Product name</h2>
-                    <p><strong>Category:</strong> <span th:text="${product.category}">Category</span></p>
-                    <p><strong>Price:</strong> <span th:text="${product.price}">0</span> $</p>
-                    <img th:src="${product.imageUrl}" alt="Product picture" width="200">
-                </div>
-            </div>
+        <section class="products-grid">
+            <p th:if="${#lists.isEmpty(products)}">No items found.</p>
+            <th:block th:if="${products != null and !#lists.isEmpty(products)}">
+                <div th:each="product : ${products}"
+                     th:replace="~{fragments/productCard :: productCard(${product})}"></div>
+            </th:block>
         </section>
     </div>
 </div>
