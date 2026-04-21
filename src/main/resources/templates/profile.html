@@ -10,7 +10,6 @@
 <body>
 <div layout:fragment="content">
     <div class="profile-page">
-
         <div class="profile-header">
             <div class="profile-avatar">
                 <span th:text="${#strings.substring(email, 0, 1).toUpperCase()}">U</span>
@@ -34,7 +33,7 @@
         <div class="profile-section">
             <h2>Actions</h2>
             <div class="action-list">
-                <form th:action="@{/profile/send-email}" method="post">
+                <form th:action="@{/profile/send-userinfo}" method="post">
                     <button type="submit" class="btn-action">
                         Get my data via email <span class="arrow">→</span>
                     </button>
@@ -57,6 +56,9 @@
                 </form>
             </div>
         </div>
+
+        <p th:if="${error}" th:text="${error}" class="toast toast-error"></p>
+        <p th:if="${success}" th:text="${success}" class="toast toast-success"></p>
     </div>
 </div>
 </body>
