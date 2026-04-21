@@ -19,24 +19,20 @@ public class SecurityConfig {
         http
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/images/**").permitAll()
-                        .requestMatchers("/", "/login", "/register", "/error").permitAll()
-                        .requestMatchers("/cookies/**").permitAll()
+                        .requestMatchers(
+                                "/css/**",
+                                "/images/**",
+                                "/login",
+                                "/login-request",
+                                "/register",
+                                "/verify-login",
+                                "/error"
+                        ).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .successHandler((request, response, authentication) -> {
-                            boolean isAdmin = authentication.getAuthorities().stream()
-                                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
-
-                            if (isAdmin) {
-                                response.sendRedirect("/admin");
-                            } else {
-                                response.sendRedirect("/");
-                            }
-                        })
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -49,7 +45,7 @@ public class SecurityConfig {
                 )
                 .exceptionHandling(exception -> exception
                         .accessDeniedHandler((request, response, accessDeniedException) ->
-                                response.sendRedirect("/"))
+                                response.sendRedirect("/login"))
                 );
 
         return http.build();
@@ -62,10 +58,8 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider(AppUserDatabaseService appUserDatabaseService) {
-        DaoAuthenticationProvider authProvider =
-                new DaoAuthenticationProvider(appUserDatabaseService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(appUserDatabaseService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
 }
