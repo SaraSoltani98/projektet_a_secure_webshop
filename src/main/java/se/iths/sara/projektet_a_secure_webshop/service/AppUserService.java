@@ -6,6 +6,8 @@ import se.iths.sara.projektet_a_secure_webshop.model.AppUser;
 import se.iths.sara.projektet_a_secure_webshop.model.Role;
 import se.iths.sara.projektet_a_secure_webshop.repository.AppUserRepository;
 
+import java.util.Optional;
+
 @Service
 public class AppUserService {
 
@@ -16,6 +18,10 @@ public class AppUserService {
                           PasswordEncoder passwordEncoder) {
         this.appUserRepository = appUserRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public Optional<AppUser> findByEmail(String email) {
+        return appUserRepository.findByEmail(email);
     }
 
     public AppUser registerUser(AppUser user) {
