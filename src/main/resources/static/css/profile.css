@@ -1,0 +1,134 @@
+.profile-page {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 48px 32px;
+}
+
+.profile-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.profile-avatar {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    font-size: 20px;
+    color: #ffffff;
+    background: #925ff3;
+}
+
+.profile-header h1 {
+    font-size: 22px;
+}
+
+.profile-header p {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.profile-section {
+    margin-bottom: 32px;
+}
+
+.profile-section h2 {
+    margin-bottom: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+}
+
+.profile-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.profile-row {
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.profile-row:last-child {
+    border-bottom: none;
+}
+
+.profile-row span:first-child {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.profile-row span:last-child {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.action-list {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.action-list form {
+    display: block;
+}
+
+.btn-action {
+    cursor: pointer;
+    width: 100%;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    color: #111827;
+    background: white;
+    transition: background 0.2s;
+}
+
+.action-list > *:last-child .btn-action,
+.action-list .btn-action:last-child {
+    border-bottom: none;
+}
+
+.btn-action:hover {
+    background: #f4f4f4;
+}
+
+.btn-action .arrow {
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.btn-action.danger {
+    color: #660000;
+    background: #ffcccc;
+}
+
+.btn-action.danger:hover {
+    background: #ffb3b3;
+}
+
+.btn-action.danger .arrow {
+    color: #660000;
+}
