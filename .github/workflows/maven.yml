@@ -1,35 +1,36 @@
-name: Java CI with Maven
+name: Maven Build
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+
+      - name: Checka ut koden
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+
+      - name: Installera Java och konfigurera Maven auth
         uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: '17'
-          distribution: 'temurin'
           cache: maven
-
-      - name: Build mail module
-        run: |
-          cd spring-messenger
-          mvn clean install
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
 
 
-      - name: Build webshop module
-        run: |
-          cd projektet_a_secure_webshop
-          mvn clean package
-
-  
+      - name: Bygg projektet
+        run: mvn -B clean package
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

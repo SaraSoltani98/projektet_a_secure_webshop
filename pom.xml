@@ -30,6 +30,12 @@
         <java.version>17</java.version>
         <groovy.version>4.0.23</groovy.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/MartinGruter/spring-messenger</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
