@@ -19,23 +19,32 @@ public class SecurityConfig {
         http
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/css/**", "/images/**").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/error").permitAll()
+                        .requestMatchers("/cookies/**").permitAll()
                         .requestMatchers(
-                                "/css/**",
-                                "/images/**",
-                                "/login",
                                 "/login-request",
-                                "/register",
-                                "/verify-login",
-                                "/error"
+                                "/verify-login"
                         ).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        // Double check later
+                        .successHandler((request, response, authentication) -> {
+                            boolean isAdmin = authentication.getAuthorities().stream()
+                                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+
+                            if (isAdmin) {
+                                response.sendRedirect("/admin");
+                            } else {
+                                response.sendRedirect("/");
+                            }
+                        })
+                        // ---------
                         .permitAll()
                 )
-
                 .exceptionHandling(exception -> exception
                         .accessDeniedHandler((request, response, accessDeniedException) ->
                                 response.sendRedirect("/login"))

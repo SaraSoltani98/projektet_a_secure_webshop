@@ -67,7 +67,7 @@ public class AuthController {
         Optional<AppUser> optionalUser = appUserService.findByEmail(email);
 
         if (optionalUser.isEmpty()) {
-            return "redirect:/register?needRegister=true&email=" + email;
+            return "redirect:/register";
         }
 
         AppUser user = optionalUser.get();
@@ -79,12 +79,13 @@ public class AuthController {
 
         LoginToken token = loginTokenService.createToken(email);
 
-        // Tillfällig lösning tills riktig mail-service är inkopplad
+        /* Tillfällig lösning tills riktig mail-service är inkopplad
         System.out.println("===== LOGIN MAIL =====");
         System.out.println("Till: " + email);
         System.out.println("Klicka på länken:");
         System.out.println("http://localhost:8080/verify-login?token=" + token.getToken());
         System.out.println("======================");
+        */
 
         model.addAttribute("message", "En inloggningslänk har skickats till din email.");
         return "login";
