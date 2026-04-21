@@ -1,43 +1,34 @@
 <!DOCTYPE html>
-<html lang="sv" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Webshop - Login</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
 </head>
 <body>
 
-<h2>Logga in</h2>
+<main class="auth-page">
+    <section class="form-section">
+        <h2>Sign in</h2>
+        <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
+        <p th:if="${message != null}" th:text="${message}" style="color:green;"></p>
+        <form method="post" th:action="@{/login-request}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <div class="form-field">
+                <label for="email-field">Email</label>
+                <input id="email-field" type="email" name="username" required>
+            </div>
 
-<!-- 🔓 Logout message -->
-<p th:if="${param.logout}" style="color:green;">
-    Du har loggats ut.
-</p>
+            <div class="form-field">
+                <label for="password-field">Password</label>
+                <input id="password-field" type="password" name="password" required>
+            </div>
 
-<!-- ❌ Error -->
-<p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
-
-<!-- ✅ Mail skickad -->
-<p th:if="${message != null}" th:text="${message}" style="color:green;"></p>
-
-<form method="post" th:action="@{/login-request}">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-
-    <label for="email">Email:</label>
-    <input id="email" type="email" name="email" required>
-    <br><br>
-
-    <label for="password">Lösenord:</label>
-    <input id="password" type="password" name="password" required>
-    <br><br>
-
-    <button type="submit">Logga in</button>
-</form>
-
-<br>
-
-<a th:href="@{/register}">
-    <button type="button">Registrera dig</button>
-</a>
+            <button class="btn btn-primary btn-full" type="submit">Sign in</button>
+        </form>
+        <a th:href="@{/register}">Don't have an account? Sign up!</a>
+    </section>
+</main>
 
 </body>
 </html>
