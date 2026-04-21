@@ -38,4 +38,8 @@ public class AppUserService {
 
         return appUserRepository.save(user);
     }
+
+    public void deleteUser(AppUser user) {
+        appUserRepository.delete(user);
+    }
 }
