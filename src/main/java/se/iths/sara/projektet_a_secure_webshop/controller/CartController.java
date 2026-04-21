@@ -21,6 +21,7 @@ public class CartController {
         this.productService = productService;
     }
 
+    @GetMapping
     public String showCart(HttpSession session, Model model) {
         Cart cart = getOrCreateCart(session);
         model.addAttribute("cart", cart);
