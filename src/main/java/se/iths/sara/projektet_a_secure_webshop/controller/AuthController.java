@@ -12,8 +12,11 @@ import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import se.iths.martin.springmessenger.model.Email;
+import se.iths.martin.springmessenger.service.MessageService;
 import se.iths.sara.projektet_a_secure_webshop.model.AppUser;
 import se.iths.sara.projektet_a_secure_webshop.model.LoginToken;
 import se.iths.sara.projektet_a_secure_webshop.service.AppUserService;
@@ -28,15 +31,18 @@ public class AuthController {
     private final AppUserService appUserService;
     private final LoginTokenService loginTokenService;
     private final PasswordEncoder passwordEncoder;
+    private final MessageService messageService;
     private final SecurityContextRepository securityContextRepository =
             new HttpSessionSecurityContextRepository();
 
     public AuthController(AppUserService appUserService,
                           LoginTokenService loginTokenService,
-                          PasswordEncoder passwordEncoder) {
+                          PasswordEncoder passwordEncoder,
+                          MessageService messageService) {
         this.appUserService = appUserService;
         this.loginTokenService = loginTokenService;
         this.passwordEncoder = passwordEncoder;
+        this.messageService = messageService;
     }
 
     @GetMapping("/login")
@@ -60,11 +66,9 @@ public class AuthController {
     }
 
     @PostMapping("/login-request")
-    public String login(@RequestParam String email,
-                        @RequestParam String password,
-                        Model model) {
+    public String login(@ModelAttribute AppUser appUser, Model model) {
 
-        Optional<AppUser> optionalUser = appUserService.findByEmail(email);
+        Optional<AppUser> optionalUser = appUserService.findByEmail(appUser.getEmail());
 
         if (optionalUser.isEmpty()) {
             return "redirect:/register";
@@ -72,20 +76,18 @@ public class AuthController {
 
         AppUser user = optionalUser.get();
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        if (!passwordEncoder.matches(appUser.getPassword(), user.getPassword())) {
             model.addAttribute("error", "Fel lösenord");
             return "login";
         }
 
-        LoginToken token = loginTokenService.createToken(email);
+        LoginToken token = loginTokenService.createToken(appUser.getEmail());
 
-        /* Tillfällig lösning tills riktig mail-service är inkopplad
-        System.out.println("===== LOGIN MAIL =====");
-        System.out.println("Till: " + email);
-        System.out.println("Klicka på länken:");
-        System.out.println("http://localhost:8080/verify-login?token=" + token.getToken());
-        System.out.println("======================");
-        */
+        Email email = new Email();
+        email.setRecipient(token.getEmail());
+        email.setSubject("Din inloggningslänk");
+        email.setMessage("Klicka på länken för att logga in: http://localhost:8080/verify-login?token=" + token.getToken());
+        messageService.send(email);
 
         model.addAttribute("message", "En inloggningslänk har skickats till din email.");
         return "login";
