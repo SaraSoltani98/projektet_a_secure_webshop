@@ -16,6 +16,8 @@
         </div>
 
         <div sec:authorize="isAuthenticated()">
+            <a class="btn btn-secondary" th:href="@{/cart}">Cart</a>
+
             <a class="btn btn-secondary" th:href="@{/profile}">Profile</a>
 
             <form th:action="@{/logout}" method="post">
