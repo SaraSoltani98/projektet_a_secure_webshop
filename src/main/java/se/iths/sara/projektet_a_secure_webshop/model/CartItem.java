@@ -16,6 +16,10 @@ public class CartItem {
         this.quantity++;
     }
 
+    public void decreaseQuantity() {
+        this.quantity--;
+    }
+
     public BigDecimal getTotalPrice() {
         return product.getPrice().multiply(BigDecimal.valueOf(quantity));
     }
