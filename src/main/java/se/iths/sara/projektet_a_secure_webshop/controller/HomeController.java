@@ -17,4 +17,9 @@ public class HomeController {
         model.addAttribute("hasConsented", hasConsented(request));
         return "home";
     }
+
+    @GetMapping("/policy")
+    public String policyHome() {
+        return "policy";
+    }
 }

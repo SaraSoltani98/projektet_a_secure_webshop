@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Webshop - Privacy Policy</title>
+    <link rel="stylesheet" th:href="@{/css/policy.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="policy-page">
+
+        <div class="policy-header">
+            <h1>Privacy Policy</h1>
+            <div class="policy-meta">
+                <span>Last updated: April 2026</span>
+                <span>Effective: April 2026</span>
+            </div>
+        </div>
+
+        <div class="policy-toc">
+            <h3>Contents</h3>
+            <ol>
+                <li><a href="#collect">What information we collect</a></li>
+                <li><a href="#use">How we use your information</a></li>
+                <li><a href="#store">How we store your data</a></li>
+                <li><a href="#rights">Your rights under GDPR</a></li>
+                <li><a href="#cookies">Cookies</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ol>
+        </div>
+
+        <div class="policy-section" id="collect">
+            <h2><span class="section-num">01</span> What information we collect</h2>
+            <p>When you create an account or make a purchase, we collect the following personal data:</p>
+            <ul>
+                <li>Email address — used for login and order communication</li>
+                <li>Password — stored encrypted using BCrypt, never in plain text</li>
+                <li>Consent — we record whether you have agreed to our terms</li>
+            </ul>
+            <div class="policy-highlight">
+                <p>We only collect data that is strictly necessary. We do not sell your data to third parties.</p>
+            </div>
+        </div>
+
+        <hr class="policy-divider">
+
+        <div class="policy-section" id="use">
+            <h2><span class="section-num">02</span> How we use your information</h2>
+            <ul>
+                <li>Authenticating your login</li>
+                <li>Processing and managing your orders</li>
+                <li>Sending order confirmations</li>
+                <li>Complying with legal obligations</li>
+            </ul>
+        </div>
+
+        <hr class="policy-divider">
+
+        <div class="policy-section" id="store">
+            <h2><span class="section-num">03</span> How we store your data</h2>
+            <p>Passwords are hashed using BCrypt and are never readable by anyone. Session data is managed by Spring
+                Security and expires on logout.</p>
+        </div>
+
+        <hr class="policy-divider">
+
+        <div class="policy-section" id="rights">
+            <h2><span class="section-num">04</span> Your rights under GDPR</h2>
+            <ul>
+                <li><strong>Right of access</strong> — request a copy of your data</li>
+                <li><strong>Right to erasure</strong> — delete your account and data</li>
+                <li><strong>Right to rectification</strong> — correct inaccurate data</li>
+                <li><strong>Right to portability</strong> — receive data in machine-readable format</li>
+                <li><strong>Right to object</strong> — object to how we process your data</li>
+            </ul>
+            <p>You can exercise these rights from your <a th:href="@{/profile}">profile page</a>.</p>
+        </div>
+
+        <hr class="policy-divider">
+
+        <div class="policy-section" id="cookies">
+            <h2><span class="section-num">05</span> Cookies</h2>
+            <p>We use essential cookies only. For full details see our <a th:href="@{/cookies}">Cookie information</a>
+                page.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
