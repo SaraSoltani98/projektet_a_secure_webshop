@@ -2,7 +2,7 @@ FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-COPY target/projektet_a_secure_webshop-1.0.0.jar app.jar
+COPY target/projektet_a_secure_webshop-1.1.0.jar app.jar
 
 EXPOSE 8080
 
