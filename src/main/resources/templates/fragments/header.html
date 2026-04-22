@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<body>
 <!-- Header with nav -->
 <header th:fragment="header">
     <nav>
@@ -6,7 +10,19 @@
             <li><a th:href="@{/products}">Products</a></li>
         </ul>
 
-        <a class="btn btn-secondary" th:href="@{/login}">Sign In</a>
-        <a class="btn btn-primary" th:href="@{/register}">Sign Up</a>
+        <div sec:authorize="isAnonymous()">
+            <a class="btn btn-secondary" th:href="@{/login}">Sign In</a>
+            <a class="btn btn-primary" th:href="@{/register}">Sign Up</a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <a class="btn btn-secondary" th:href="@{/profile}">Profile</a>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-danger">Log Out</button>
+            </form>
+        </div>
     </nav>
 </header>
+</body>
+</html>
