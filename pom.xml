@@ -10,7 +10,7 @@
     </parent>
     <groupId>se.iths.sara</groupId>
     <artifactId>projektet_a_secure_webshop</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>projektet_a_secure webshop</name>
     <description>projektet_a_secure webshop</description>
     <url/>
