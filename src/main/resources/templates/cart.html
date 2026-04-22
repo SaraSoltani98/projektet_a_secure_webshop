@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Webshop - Cart</title>
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
 </head>
 <body>
-<div>Cart</div>
+<div layout:fragment="content">
+    <div class="cart-page">
+        <h2>Your Cart</h2>
+        <div class="cart-item" th:each="item : ${cart.getItems()}">
+            <img th:src="some" class="cart-item-image" alt="product image">
+            <div class="cart-item-info">
+                <div class="cart-item-header">
+                    <h4 th:text="${item.product.name}"></h4>
+                    <p class="cart-item-category" th:text="${item.product.category}"></p>
+                </div>
+                <div class="cart-item-footer">
+                    <p th:text="${item.product.price} + ' $'"></p>
+                    <div>
+                        <!--<button th:onclick="${item}">-</button>-->
+                        <p th:text="'x ' + ${item.quantity}"></p>
+                        <!--<button th:onclick="${item}">+</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="cart-total"><span>Total: </span> <span th:text="${cart.getTotalAmount()}"></span> $</p>
+        <form th:action="@{/order}" method="post">
+            <button type="submit" class="btn btn-primary">To Checkout</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
