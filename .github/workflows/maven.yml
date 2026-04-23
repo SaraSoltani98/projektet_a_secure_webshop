@@ -46,4 +46,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: anwarasry/projektet_a_secure_webshop:1.1.0
+          tags: anwarasry/projektet_a_secure_webshop:1.2.0
