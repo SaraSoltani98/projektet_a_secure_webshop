@@ -41,8 +41,19 @@
         <section class="products-grid">
             <p th:if="${#lists.isEmpty(products)}">No items found.</p>
             <th:block th:if="${products != null and !#lists.isEmpty(products)}">
-                <div th:each="item : ${products}"
-                     th:replace="~{fragments/productCard :: productCard(${item})}"></div>
+                <div th:each="item : ${products}" class="product-card">
+                    <img th:src="${item.imageUrl}" alt="Product picture">
+                    <div class="product-info">
+                        <span class="product-category" th:text="${item.category}">Category</span>
+                        <h3 class="product-name" th:text="${item.name}">Product name</h3>
+                        <div class="product-footer">
+            <span class="product-price"
+                  th:text="'$ ' + ${item.price}">
+                0 $
+            </span>
+                        </div>
+                    </div>
+                </div>
             </th:block>
         </section>
     </div>
