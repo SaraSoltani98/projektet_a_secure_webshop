@@ -25,7 +25,7 @@
                         0 $
                     </span>
                     </div>
-                    <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+                    <form th:action="@{/cart/add/{id}(id=${product.id})}" method="get">
                         <button class="btn btn-primary btn-full" type="submit">Add to cart</button>
                     </form>
                 </div>

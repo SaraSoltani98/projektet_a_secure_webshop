@@ -10,6 +10,7 @@ import se.iths.sara.projektet_a_secure_webshop.repository.OrderRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -47,5 +48,9 @@ public class OrderService {
 
         return savedOrder;
 
+    }
+
+    public Optional<Order> getOrder(Long id) {
+        return orderRepository.findById(id);
     }
 }

@@ -25,6 +25,9 @@ public class Order {
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
         this.order = order;
+        for (OrderItem orderItem : order) {
+            orderItem.setOrder(this);
+        }
     }
 
     public Order() {
@@ -60,6 +63,10 @@ public class Order {
 
     public List<OrderItem> getOrder() {
         return order;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setOrder(List<OrderItem> order) {
