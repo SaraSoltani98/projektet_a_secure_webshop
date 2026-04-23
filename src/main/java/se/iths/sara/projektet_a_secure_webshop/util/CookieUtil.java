@@ -29,8 +29,7 @@ public class CookieUtil {
         return null;
     }
 
-    public static boolean hasConsented(HttpServletRequest request) {
-        String consent = getCookieValue(request);
-        return consent != null && consent.equals("true");
+    public static boolean hasResponded(HttpServletRequest request) {
+        return getCookieValue(request) != null;
     }
 }
