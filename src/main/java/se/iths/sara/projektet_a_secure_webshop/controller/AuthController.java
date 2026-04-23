@@ -86,7 +86,7 @@ public class AuthController {
         Email email = new Email();
         email.setRecipient(token.getEmail());
         email.setSubject("Din inloggningslänk");
-        email.setMessage("Klicka på länken för att logga in: http://localhost:8080/verify-login?token=" + token.getToken());
+        email.setMessage("Klicka på länken för att logga in: " + System.getenv("PUBLIC_URL") + "/verify-login?token=" + token.getToken());
         messageService.send(email);
 
         model.addAttribute("message", "En inloggningslänk har skickats till din email.");

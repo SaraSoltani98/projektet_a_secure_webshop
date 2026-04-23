@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Order confirmed!</h2>
+    <p th:text="'Order: ' + ${order.getId()}"></p>
+    <p th:text="${order.getUsername()}"></p>
+    <div class="cart-item" th:each="item : ${order.getOrder()}">
+        <div class="cart-item-info">
+            <div class="cart-item-header">
+                <h4 th:text="${item.productName}"></h4>
+            </div>
+            <div class="cart-item-footer">
+                <p th:text="${item.price} + ' $'"></p>
+            </div>
+        </div>
+    </div>
+    <p th:text="'$ ' + ${order.getTotalPrice()}"></p>
+</div>
+</body>
+</html>
