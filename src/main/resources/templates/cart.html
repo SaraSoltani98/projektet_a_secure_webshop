@@ -19,7 +19,7 @@
                     <p class="cart-item-category" th:text="${item.product.category}"></p>
                 </div>
                 <div class="cart-item-footer">
-                    <p th:text="${item.product.price} + ' $'"></p>
+                    <p th:text="'$ ' + ${item.product.price}"></p>
                     <div>
                         <!--<button th:onclick="${item}">-</button>-->
                         <p th:text="'x ' + ${item.quantity}"></p>
