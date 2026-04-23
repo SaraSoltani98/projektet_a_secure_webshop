@@ -41,8 +41,8 @@
         <section class="products-grid">
             <p th:if="${#lists.isEmpty(products)}">No items found.</p>
             <th:block th:if="${products != null and !#lists.isEmpty(products)}">
-                <div th:each="product : ${products}"
-                     th:replace="~{fragments/productCard :: productCard(${product})}"></div>
+                <div th:each="item : ${products}"
+                     th:replace="~{fragments/productCard :: productCard(${item})}"></div>
             </th:block>
         </section>
     </div>
