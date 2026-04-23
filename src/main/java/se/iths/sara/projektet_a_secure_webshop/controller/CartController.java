@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.iths.sara.projektet_a_secure_webshop.model.Cart;
 import se.iths.sara.projektet_a_secure_webshop.model.Product;
@@ -28,7 +29,7 @@ public class CartController {
         return "cart";
     }
 
-    @GetMapping("/add/{id}")
+    @PostMapping("/add/{id}")
     public String addToCart(@PathVariable Long id, HttpSession session) {
         Product product = productService.getProductById(id);
         Cart cart = getOrCreateCart(session);

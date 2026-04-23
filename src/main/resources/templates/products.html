@@ -21,11 +21,9 @@
                     <span class="product-category" th:text="${product.category}">Category</span>
                     <h3 class="product-name" th:text="${product.name}">Product name</h3>
                     <div class="product-footer">
-                    <span class="product-price" th:text="${product.price} + ' $'">
-                        0 $
-                    </span>
+                        <span class="product-price" th:text="'$ ' + ${product.price}"></span>
                     </div>
-                    <form th:action="@{/cart/add/{id}(id=${product.id})}" method="get">
+                    <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
                         <button class="btn btn-primary btn-full" type="submit">Add to cart</button>
                     </form>
                 </div>
