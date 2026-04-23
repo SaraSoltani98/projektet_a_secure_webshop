@@ -5,7 +5,7 @@
         <h3 class="product-name" th:text="${product.name}">Product name</h3>
         <div class="product-footer">
             <span class="product-price"
-                  th:text="${product.price} + ' $'">
+                  th:text="'$ ' + ${product.price}">
                 0 $
             </span>
         </div>
